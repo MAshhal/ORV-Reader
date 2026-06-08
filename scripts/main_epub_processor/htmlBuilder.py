@@ -1,6 +1,13 @@
 import re
 import os
 import urllib.parse as urlparse
+import sys
+import os
+
+root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if root_path not in sys.path:
+    sys.path.append(root_path)
+from others.banners import get_chapter_banner
 
 
 for file_index, file in enumerate(os.listdir("chapters/orv")):
@@ -14,12 +21,32 @@ for file_index, file in enumerate(os.listdir("chapters/orv")):
         file_index = int(file.replace(".txt", "").replace("chap_", "")) - 1
         with open(f"./chapters/orv/{file}", "r", encoding="utf-8") as f:
             textStr = f.read()
+            # Temporarily replace special markers to preserve them during & escaping
+            markers = {
+                '<!>': '___MARKER_SYSTEM___',
+                '<@>': '___MARKER_CONSTELLATION___',
+                '<&>': '___MARKER_QUOTE___',
+                '<#>': '___MARKER_OUTERGOD___',
+                '<?>': '___MARKER_NOTICE___',
+            }
+            for marker, placeholder in markers.items():
+                textStr = textStr.replace(marker, placeholder)
+            
+            # Escape ampersand characters that are not part of HTML entities
+            # This regex matches & that are NOT followed by common HTML entity patterns
+            textStr = re.sub(r'&(?!(?:lt|gt|amp|quot|apos|#\d+|#x[\da-fA-F]+);)', '&amp;', textStr)
+            
             def replace_match(match):
                 original_tag = match.group(0)
                 return f"&lt;{original_tag[1:-1]}&gt;"
 
-            pattern = r'<(?!img\b|title\b|cover\b|br\b)(?=[^>]{1,})(?=[^>]*\w)[^>]*?>'
+            pattern = r'<(?!img\b|title\b|cover\b|br\b)(?=[^\n>]{1,})(?=[^\n>]*\w)[^\n>]*?>'
             textStr = re.sub(pattern, replace_match, textStr)
+            
+            # Restore the special markers
+            for marker, placeholder in markers.items():
+                textStr = textStr.replace(placeholder, marker)
+            
             text = textStr.split("\n")
 
         with open("website/stories/orv/read/template.html", "r", encoding="utf-8") as f:
@@ -108,28 +135,39 @@ for file_index, file in enumerate(os.listdir("chapters/orv")):
             else:
                 html.append(f'<p class="orv_line">{line}</p>')
 
-
-        if file_index == 0:
-            template = template.replace(r"{{PREV}}", "..\\")
+        # Get all chapter files to determine first and last
+        chapter_files = sorted([f for f in os.listdir("chapters/orv") if f.endswith(".txt")])
+        chapter_numbers = [int(f.replace(".txt", "").replace("chap_", "")) for f in chapter_files]
+        first_chapter_index = min(chapter_numbers) - 1
+        last_chapter_index = max(chapter_numbers) - 1
+        
+        # Handle Previous button
+        if file_index == first_chapter_index:
+            template = template.replace(r"{{PREV}}", "../")
+            template = template.replace(r"{{PREV-TEXT}}", "Home")
             template = template.replace(
                 r"{{PREV-SVG}}",
-                '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>',
+                '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z" /></svg>',
             )
         else:
             template = template.replace(r"{{PREV}}", f"ch_{file_index}")
+            template = template.replace(r"{{PREV-TEXT}}", "Previous")
             template = template.replace(
                 r"{{PREV-SVG}}",
                 '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" /></svg>',
             )
 
-        if file_index == len(os.listdir("chapters/orv")) - 1:
+        # Handle Next button
+        if file_index == last_chapter_index:
             template = template.replace(r"{{NEXT}}", "../")
+            template = template.replace(r"{{NEXT-TEXT}}", "Home")
             template = template.replace(
                 r"{{NEXT-SVG}}",
-                '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg>',
+                '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z" /></svg>',
             )
         else:
             template = template.replace(r"{{NEXT}}", f"ch_{file_index+2}")
+            template = template.replace(r"{{NEXT-TEXT}}", "Next")
             template = template.replace(
                 r"{{NEXT-SVG}}",
                 '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" /></svg>',
@@ -145,12 +183,28 @@ for file_index, file in enumerate(os.listdir("chapters/orv")):
         template = template.replace(r"{{PATH}}", f"orv/{file}")
         template = template.replace(r"{{INDEX}}", str(file_index))
 
+        # Banner logic: First 5 chapters = Discord, Last 5 chapters = Donation, Others = Random
+        current_chapter = file_index + 1
+        first_chapter = min(chapter_numbers)
+        last_chapter = max(chapter_numbers)
+
+        banner_html = get_chapter_banner(
+            current_chapter=current_chapter,
+            first_chapter=first_chapter,
+            last_chapter=last_chapter,
+            base_path="../../../"
+        )
+
+        template = template.replace(r"{{BANNER}}", banner_html)
+
         template = template.replace(r"{{TITLE}}", "")
         template = template.replace(r"{{COVER}}", "")
         template = template.replace(r"{{PREV}}", "")
         template = template.replace(r"{{NEXT}}", "")
         template = template.replace(r"{{PREV-SVG}}", "")
         template = template.replace(r"{{NEXT-SVG}}", "")
+        template = template.replace(r"{{PREV-TEXT}}", "")
+        template = template.replace(r"{{NEXT-TEXT}}", "")
         template = template.replace(r"{{INDEX}}", "")
 
         with open(

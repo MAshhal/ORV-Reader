@@ -1,4 +1,4 @@
-<title>Ch 257: Ep. 45 - Entrance as a Character, III
+<title>Ch 257: Ep. 48 - Entrance as a Character, III
 "Things have been roughly sorted out."
 I sighed with relief as I looked at Yoo Joonghyuk through the screen of the channel. I was anxious about the bureau arriving but fortunately, Yoo Joonghyuk was faster. It was a good choice to convey a message to Uriel through Jang Hayoung.
 <!>[The constellation 'Demon-like Judge of Fire' is smiling brightly.]
@@ -56,9 +56,10 @@ The channel became a terrible mess with indirect messages supporting and opposin
 <!>[You must protect the Story Core from the attacking constellations.]
 I smiled bitterly as I faced Dokgak. Yes, this was what he came up with.
 "Kim Dokja, how…"
-Rather than answering Jang Hayoung, I opened the wide and yelled towards the citizens.
+Rather than answering Jang Hayoung, I opened the mouth wide and yelled towards the citizens.
 <@>[All citizens. This is the first time I am personally greeting you.]
-My true voice resonated through the industrial complex. I once again breathed in and shouted, [Please calm down and concentrate on my words.]
+My true voice resonated through the industrial complex. I once again breathed in and shouted,
+<@>[Please calm down and concentrate on my words.]
 The voice of the duke was heard for the first time and all the citizens looked at me. Voices came from all over the place. "It is Kim Dokja!"
 "That person is the duke!"
 Unfortunately, I couldn't match their expectations.
@@ -78,8 +79,7 @@ Messages poured out and I left a final message.
 Bihyung might've argued against this if he was here but now he was lying in a distant place.
 <!>[The citizens of the industrial complex are giving a standing ovation for your noble sacrifice.]
 Thanks but I wasn't planning a noble sacrifice. I focused on the energy coming from beyond the barrier of the industrial complex. There were four huge energy sources. At least four constellations were approaching.
-"Jang Hayoung. Take Han Myungoh and the Breaking the Sky Master. Flee and don't look back.
-Never think about fighting them."
+"Jang Hayoung. Take Han Myungoh and the Breaking the Sky Master. Flee and don't look back. Never think about fighting them."
 "What? I don't want to!"
 "I don't care if you want to! Go directly to Yoo Joonghyuk. Quickly!"
 There were 'four' coming now but there would be more behind them. They weren't something a transcendent dog, a human whose gender was ambiguous and a middle-aged man who had been pregnant could face.
@@ -96,7 +96,8 @@ The four approaching constellations listened to me.
 The fearsome constellations followed behind me. The reason I could flee was because we had equal stats.
 They were four and I was one. I didn't have much of a chance, regardless of whether the constellations were high or low ranking.
 I ran over barriers using Way of the Wind. The constellations confirmed I was holding the Story Core and started to chase me. If they took me down here, they could qualify to participate in the Demon King Selection. It wasn't strange for them to go on a rampage like this.
-Dokgak laughed at me. [Hahaha, it is very easy to run away! Constellations, do you really want to stay on Bihyung's channel to watch such a person?]
+Dokgak laughed at me. 
+<!>[Hahaha, it is very easy to run away! Constellations, do you really want to stay on Bihyung's channel to watch such a person?]
 This son of a bitch… I wouldn't have suffered from this sub scenario if Bihyung hadn't been distracted. However, I couldn't do anything because Bihyung wasn't here.
 "Requesting a rise in membership level of the Dokkaebi Bag."
 I had already become a 'platinum' level which was an increase by two levels. Still, platinum wasn't the highest rating.
@@ -155,6 +156,6 @@ Description: It can fuse together different types of stories. There is a very lo
 An item that had a very low probability of generating a high-grade story when mixing certain combinations of stories. Originally, this item wasn't very useful. The same stories being put together produced different results every time and the odds of getting a good story were ridiculously low.
 Nevertheless, according to the characters' remarks, there was a bug in the 1.3 version of the fusion box.
 <&>「 "The sale of the box was discontinued because of this. Shit, I should've tried it before Anna Croft―" 」
-There was a bug with the 1.3 version fo the Story Fusion Box. It was that when mixing certain stories, the first person who did it must receive a 'certain story'.
+There was a bug with the 1.3 version for the Story Fusion Box. It was that when mixing certain stories, the first person who did it must receive a 'certain story'.
 The two stories were poured into the box without hesitation and there was a bright flash of light. A message entered my ears along with the throbbing pain.
 <!>[The legendary story 'Distorting Things as One Pleases' has been acquired.]

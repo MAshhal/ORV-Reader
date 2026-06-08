@@ -85,7 +85,7 @@ setTimeout(() => {
     let type = scriptElement.dataset.type;
     localStorage.setItem("lastread", String(index))
     localStorage.setItem("lasttype", String(type))
-}, 60000);
+}, 10000);
 
 function classChangeTheme(elementClass, elemetTheme) {
     let element = document.getElementsByClassName(elementClass)
@@ -105,7 +105,7 @@ function classChangeTheme(elementClass, elemetTheme) {
 
 function loadSettingsFromLocalStorage() {
     try {
-        let settings = JSON.parse(localStorage.getItem('settings'));
+        let settings = JSON.parse(localStorage.getItem('settings1'));
 
         if (!settings) return null;
 
@@ -116,12 +116,14 @@ function loadSettingsFromLocalStorage() {
             document.getElementById('set-font').value = settings.font;
         }
         if (settings.fontSize) {
+            if (settings.fontSize == 52) { settings.fontSize = 51; }
             document.getElementById('set-font-size').value = settings.fontSize;
         }
         if (settings.fontWeight) {
             document.getElementById('set-font-weight').value = settings.fontWeight;
         }
         if (settings.lineHeight) {
+            if (settings.lineHeight == 32) { settings.lineHeight = 49; } // legacy code
             document.getElementById('set-line-height').value = settings.lineHeight;
         }
         if (settings.richTextToggle !== undefined) {
@@ -195,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (lineHeight > 100) { lineHeight = 100; }
         if (lineHeight < 1) { lineHeight = 1; }
-        lineHeight = lineHeight / 20
+        lineHeight = lineHeight / 30.625
         root.style.setProperty('--line-space', lineHeight + "rem")
 
         window.theme = theme;
@@ -334,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         try {
-            localStorage.setItem('settings', JSON.stringify(settings));
+            localStorage.setItem('settings1', JSON.stringify(settings));
             console.log('Settings saved to local storage.');
         } catch (error) {
             console.error('Error saving settings to local storage:', error);
@@ -402,6 +404,63 @@ document.addEventListener('DOMContentLoaded', function () {
     settingsForm.addEventListener('reset', function (event) {
         setTimeout(applySettings, 0);
     });
+
+    const scriptElement = document.getElementById('main-script');
+    if (!scriptElement) {
+        console.error("Element #main-script not found.");
+        return;
+    }
+    const index = scriptElement.dataset.index;
+    const type = scriptElement.dataset.type;
+    const scrollKey = `scrollY_${type}_${index}`;
+
+    try {
+        const savedScroll = localStorage.getItem(scrollKey);
+        if (savedScroll !== null) {
+            window.scrollTo(0, parseInt(savedScroll, 10));
+        }
+    } catch (e) {
+        console.error('Error restoring scroll:', e);
+    }
+
+    function saveScrollPosition() {
+        try {
+            localStorage.setItem(scrollKey, window.scrollY);
+
+            const SCROLL_HISTORY_KEY = `scroll_history_${type}`;
+            const MAX_HISTORY_SIZE = 5;
+
+            let history = JSON.parse(localStorage.getItem(SCROLL_HISTORY_KEY)) || [];
+
+            history = history.filter(key => key !== scrollKey);
+
+            history.unshift(scrollKey);
+
+            while (history.length > MAX_HISTORY_SIZE) {
+                const oldestKey = history.pop();
+                localStorage.removeItem(oldestKey);
+            }
+
+            localStorage.setItem(SCROLL_HISTORY_KEY, JSON.stringify(history));
+        } catch (e) {
+            console.error('Error saving scroll:', e);
+        }
+    }
+
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    window.addEventListener('scroll', debounce(saveScrollPosition, 500));
+    window.addEventListener('beforeunload', saveScrollPosition);
 });
 
 
@@ -469,11 +528,12 @@ function findChapter() {
     let chSearchresult = []
 
     for (let i = 0; i < ChapterList.length; i++) {
-        let title = String(ChapterList[i].title).toLowerCase();
+        let displayTitle = String(ChapterList[i].title)
+        let title = displayTitle.toLowerCase();
         let chSearchindex = title.indexOf(chapter.toLowerCase());
         let index = ChapterList[i].index;
         if (chSearchindex !== -1) {
-            chSearchresult.push(`<div class="chapter_item"><a href="./ch_${index + 1}"><p>${title}</p></a></div>`);
+            chSearchresult.push(`<div class="chapter_item"><a href="./ch_${index + 1}"><p>${displayTitle}</p></a></div>`);
         }
 
     }
@@ -512,6 +572,13 @@ async function releaseWakeLock() {
 
 // Request wake lock when the page loads
 window.addEventListener('load', requestWakeLock);
+
+// Request wake lock when the page is navigated back to
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    requestWakeLock()
+  }
+});
 
 // Release wake lock when the page is unloaded (navigated away from or closed)
 window.addEventListener('beforeunload', releaseWakeLock);

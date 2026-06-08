@@ -5,11 +5,22 @@
  **ORV-Reader** is a fan-made project hosting unofficial fan translations of the popular webnovel ***Omniscient Reader's Viewpoint!***
 
 🌐: [https://orv.pages.dev](https://orv.pages.dev) \
+📥: [Download EPUBs](https://orv.pages.dev/download.html) \
 ⭐: Dont forget to star this repository 
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Bittu5134/ORV-Reader/deploy-website.yml?branch=main&style=flat-square)
 ![GitHub Discussions](https://img.shields.io/github/discussions/Bittu5134/ORV-Reader?style=flat-square)
 ![GitHub Repo stars](https://img.shields.io/github/stars/Bittu5134/ORV-Reader?style=flat-square)
+
+---
+
+## Contributing 
+
+For how to contribute to this project follow the given links.
+- [Contribution Guide](./CONTRIBUTING.md)
+- [Formatting Guide](./formatting.md)
+
+Ask any queries on the [Discord Server](https://discord.gg/CZdNvKaNNr)
 
 ---
 
@@ -38,9 +49,20 @@ Learn more about the authors **Sing Shong** and the illustrator, **BlackBox**:
    * ➕ And much more!
 * **High-Quality Illustrations**: Hundreds of illustrations made by **BlackBox**-nim have been added to the site.
 * **Reader Settings**: Customize your reading experience with adjustable font size, line height, and more.
+* **EPUB Downloads**: Download the complete stories as EPUB files for offline reading on your favorite e-reader or device.
 * **Automatic Updates**: New side stories are automatically added every day to the site (kinda?)
 * **Good Translations**: The website is built with the latest fan translations and can be edited by the community. That includes you, too!
 * **Privacy**: The website does NOT have any kind of trackers and/or ads. Nobody likes those kinds of things.
+
+---
+
+## Download EPUBs
+
+You can download the complete stories as EPUB files for offline reading:
+
+📚 **[Download Page](https://orv.pages.dev/download.html)** - Get all EPUBs in one place
+
+All EPUBs include high-quality illustrations and are compatible with most e-readers and reading apps.
 
 ---
 
@@ -61,15 +83,15 @@ Learn more about the authors **Sing Shong** and the illustrator, **BlackBox**:
 
 ---
 
-## Contributing 
+## Support the Project
 
-For how to contribute to this project follow the given links.
-- [Contribution Guide](./CONTRIBUTING.md)
-- [Formatting Guide](./formatting.md).
+If you enjoy ORV-Reader and would like to support the project, you can donate using **Crypto**, **Gift Cards**, or **Steam games**. You can also contact me directly via Discord **@bittu5134** or email [ssr7a5134@gmail.com](mailto:ssr7a5134@gmail.com).
+
+**Please visit the [Donate page](https://orv.pages.dev/donate.html) for all donation options and details.**
 
 ---
 
-## Star History
+## Star History & Contributor List
 
 <a href="https://www.star-history.com/#Bittu5134/ORV-Reader&Date">
  <picture>
@@ -77,6 +99,10 @@ For how to contribute to this project follow the given links.
    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Bittu5134/ORV-Reader&type=Date" />
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Bittu5134/ORV-Reader&type=Date" />
  </picture>
+</a>
+
+<a href="https://github.com/Bittu5134/ORV-Reader/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Bittu5134/ORV-Reader" />
 </a>
 
 ---
@@ -87,7 +113,6 @@ The content is sourced from fan translations and online communities, including:
 
 [![Fandom Wiki](https://img.shields.io/badge/WIKI-%23032133?style=for-the-badge&logo=fandom&logoColor=fff)](https://omniscient-readers-viewpoint.fandom.com/wiki/Omniscient_Reader%E2%80%99s_Viewpoint_Wiki)
 [![Reddit](https://img.shields.io/badge/Reddit-FF4500?style=for-the-badge&logo=reddit&logoColor=white)](https://www.reddit.com/r/OmniscientReader)
-[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/invite/orv)
 [![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)](https://www.reddit.com/r/OmniscientReader/comments/17el055/linktree_to_orv_epub_with_illustrations_side)
 
 ---
@@ -100,4 +125,4 @@ You can find the license for this project [here](./LICENSE.md)
 
 **Please note:** I do not own the rights to the original novel. All translations available on this page are fan translations sourced from the public Internet. The sources for these translations are provided under the ["Sources"](#sources) heading.
 
-For any inquiries, you can reach me via email at <a href="mailto: ssr7a5134@gmail.com">ssr7a5134@gmail.com</a>
+For any inquiries, you can reach me via email at <a href="mailto: ssr7a5134@gmail.com">ssr7a5134@gmail.com</a> or my [Discord Server](https://discord.gg/CZdNvKaNNr)
